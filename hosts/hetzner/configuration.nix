@@ -74,7 +74,7 @@
 
   age.secrets = {
     # attic-env.file = ../../secrets/attic.env.age;
-    # tailscale.file = ../../secrets/hetzner.tailscale.age;
+    tailscale.file = ../../secrets/hetzner.tailscale.age;
   };
 
   # virtualisation = {
@@ -181,9 +181,9 @@
   #     atticd.after = [ "atticd-postgres.service" ];
   # };
 
-  # alexghr.tailscale = {
-  #   enable = true;
-  #   authKeyFile = config.age.secrets.tailscale.path;
-  #   exitNode = true;
-  # };
+  alexghr.tailscale = {
+    enable = true;
+    authKeyFile = config.age.secrets.tailscale.path;
+    exitNode = true;
+  };
 }

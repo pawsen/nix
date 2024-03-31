@@ -105,6 +105,7 @@
           ({ pkgs, ... }: {
             nix.registry.nixpkgs.flake = nixpkgs;
           })
+          self.nixosModules.tailscale
           disko.nixosModules.disko
           agenix.nixosModules.default
           ./hosts/hetzner/configuration.nix
