@@ -16,6 +16,7 @@
     ./transmission.nix
     ./syncthing.nix
     ./storagebox.nix
+    ./btrbk.nix
   ];
 
   system.stateVersion = "23.11";
@@ -88,7 +89,7 @@
     # attic-env.file = ../../secrets/attic.env.age;
     tailscale.file = ../../secrets/hetzner.tailscale.age;
     nginx-auth.file = ../../secrets/hetzner.nginx-auth.age;
-    nginx-auth2.file = ../../secrets/hetzner.nginx-auth2.age;
+    # nginx-auth2.file = ../../secrets/hetzner.nginx-auth2.age;
     storagebox.file = ../../secrets/hetzner.storagebox.age;
   };
 
@@ -124,6 +125,18 @@
     calibre-server = {
       enable = true;
       port = 8585;
+    };
+
+    tailscale = {
+      enable = true;
+      openFirewall = true;
+      # when set to server or both, IP forwarding will be enabled
+      useRoutingFeatures = "both";
+      extraUpFlags = [
+        "--ssh"
+        "--advertise-exit-node"
+      ];
+      # authKeyFile = config.age.secrets.tailscale.path;
     };
 
     # this comes with SSH jail by default
@@ -201,9 +214,6 @@
     enable = true;
     domain = "pawsen.net";
   };
-  alexghr.tailscale = {
-    enable = true;
-    authKeyFile = config.age.secrets.tailscale.path;
-    exitNode = true;
-  };
+  modules.btrbk-host.enable = true;
+
 }

@@ -107,7 +107,7 @@ in {
           "get2.${cfg.domain}" = {
             addSSL = true;
             enableACME = true;
-            basicAuthFile = config.age.secrets.nginx-auth2.path;
+            basicAuthFile = config.age.secrets.nginx-auth.path;
 
             locations."/" = {
               proxyPass = "http://127.0.0.1:9091";

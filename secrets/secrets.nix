@@ -1,43 +1,44 @@
 let
-   agSshKeys = [
-     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJKiQ7O7hXnhBSma6ge+V8lbDUW74NEq4ixNVTOQtH0H"
-     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIELd6/RHyZ3Rw6251R+nWGvkPseaX2yAC2DlZAtRziIt"
-     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCcOm5bv/HZtyaavJ0xBFvZJ6fLfuUxhtFj1UU7YXfi"
-     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAuq8bF17JoN3KO6t82wUywW3jv/hUeFwRS/USIO7Poh"
-     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRFqPVU7jQOdCVJJKj8+nDs1gLeHhz7+7qptzkI0bta"
-     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDcqnrGwHDkQPUcSOZnLEd7Y7kMxaiTkIL0uz/P2YDaV"
-   ];
+   # agSshKeys = [
+   #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJKiQ7O7hXnhBSma6ge+V8lbDUW74NEq4ixNVTOQtH0H"
+   #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIELd6/RHyZ3Rw6251R+nWGvkPseaX2yAC2DlZAtRziIt"
+   #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCcOm5bv/HZtyaavJ0xBFvZJ6fLfuUxhtFj1UU7YXfi"
+   #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAuq8bF17JoN3KO6t82wUywW3jv/hUeFwRS/USIO7Poh"
+   #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRFqPVU7jQOdCVJJKj8+nDs1gLeHhz7+7qptzkI0bta"
+   #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDcqnrGwHDkQPUcSOZnLEd7Y7kMxaiTkIL0uz/P2YDaV"
+   # ];
   pawSSHKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpF6gB2Z8CImJc3EdMlu7xyB4hwMzUxo+inccPbuvHV"
   ];
   # host keys are found at /etc/ssh/ssh_host_ed25519_key.pub
-  hk47HostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaNPaT6E+/26+O9FXE/r9NY733R2qih/HzOlybCuT6k";
-  mackeyHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGMGuXCcUtBZmwfNVX99zG01uqnaXJFndNwePt3uMGLi";
-  implausibleHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdhFymmhJWSlL4if7YjlfVuRiUPjc4r9ddpHcgCzv5v";
-  webbyHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyPv3bNmGWZ5kHZOyw2yZZxWRvf3EfiL+cTtrvJ0sNg";
-  b1HostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID9kPhQAUClUZjG4kQXRg0vxEvDAC5DEmJtLBvVtBnZ1";
-  palpatineHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICY7KI54Rb+QmhvYZkUTlGzEPni78VfTBFeUno+h1P9K";
-  r5d4HostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJNI8tDWbfknVcn3aiU8zdfLdHWECF72fch0voGR8EFe";
+
+  # hk47HostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaNPaT6E+/26+O9FXE/r9NY733R2qih/HzOlybCuT6k";
+  # mackeyHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGMGuXCcUtBZmwfNVX99zG01uqnaXJFndNwePt3uMGLi";
+  # implausibleHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdhFymmhJWSlL4if7YjlfVuRiUPjc4r9ddpHcgCzv5v";
+  # webbyHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyPv3bNmGWZ5kHZOyw2yZZxWRvf3EfiL+cTtrvJ0sNg";
+  # b1HostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID9kPhQAUClUZjG4kQXRg0vxEvDAC5DEmJtLBvVtBnZ1";
+  # palpatineHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICY7KI54Rb+QmhvYZkUTlGzEPni78VfTBFeUno+h1P9K";
+  # r5d4HostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJNI8tDWbfknVcn3aiU8zdfLdHWECF72fch0voGR8EFe";
   tigerHostKey =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaNPaT6E+/26+O9FXE/r9NY733R2qih/HzOlybCuT6k";
   hetznerHostKey =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLhTIpSbZdyuIh2ZnsgP3rfrrNYdQtYZdH3ep9AAYvi";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKwn1aZ27S2Ngxx7e0zxyx7IddyjuIclf4L1H+KlK7Bz root@hetzner";
 in {
   "tiger.tailscale.age".publicKeys = pawSSHKeys ++ [ tigerHostKey ];
   "hetzner.tailscale.age".publicKeys = pawSSHKeys ++ [ hetznerHostKey ];
   "hetzner.nginx-auth.age".publicKeys = pawSSHKeys ++ [ hetznerHostKey ];
   "hetzner.storagebox.age".publicKeys = pawSSHKeys ++ [ hetznerHostKey ];
-  "vader.restic-b2-password.age".publicKeys = agSshKeys;
-  "palpatine.tailscale.age".publicKeys = agSshKeys ++ [ palpatineHostKey ];
-  "hk47.tailscale.age".publicKeys = agSshKeys ++ [ hk47HostKey ];
-  "hk47.vader-mac.age".publicKeys = agSshKeys ++ [ hk47HostKey r5d4HostKey ];
-  "ag.npmrc.age".publicKeys = agSshKeys ++ [ mackeyHostKey palpatineHostKey ];
-  "plausible.admin.password.age".publicKeys = agSshKeys
-    ++ [ implausibleHostKey b1HostKey ];
-  "plausible.keybase.age".publicKeys = agSshKeys
-    ++ [ implausibleHostKey b1HostKey ];
-  "webby.ghcr.age".publicKeys = agSshKeys ++ [ webbyHostKey b1HostKey ];
-  "ghcr.age".publicKeys = agSshKeys ++ [ b1HostKey ];
-  "attic.env.age".publicKeys = agSshKeys ++ [ b1HostKey ];
-  "r5d4.tailscale.age".publicKeys = agSshKeys ++ [ r5d4HostKey ];
+  # "vader.restic-b2-password.age".publicKeys = agSshKeys;
+  # "palpatine.tailscale.age".publicKeys = agSshKeys ++ [ palpatineHostKey ];
+  # "hk47.tailscale.age".publicKeys = agSshKeys ++ [ hk47HostKey ];
+  # "hk47.vader-mac.age".publicKeys = agSshKeys ++ [ hk47HostKey r5d4HostKey ];
+  # "ag.npmrc.age".publicKeys = agSshKeys ++ [ mackeyHostKey palpatineHostKey ];
+  # "plausible.admin.password.age".publicKeys = agSshKeys
+  #   ++ [ implausibleHostKey b1HostKey ];
+  # "plausible.keybase.age".publicKeys = agSshKeys
+  #   ++ [ implausibleHostKey b1HostKey ];
+  # "webby.ghcr.age".publicKeys = agSshKeys ++ [ webbyHostKey b1HostKey ];
+  # "ghcr.age".publicKeys = agSshKeys ++ [ b1HostKey ];
+  # "attic.env.age".publicKeys = agSshKeys ++ [ b1HostKey ];
+  # "r5d4.tailscale.age".publicKeys = agSshKeys ++ [ r5d4HostKey ];
 }

@@ -40,6 +40,21 @@ The [./hosts] directory contains the configuration files for my machines.
 
 ## System management
 
+### Installing NixOS on a new remote machine
+
+Install any linux flavor, copy your public ssh key to the machine and run
+``` shell
+nix run github:nix-community/nixos-anywhere -- --debug --flake .#hetzner user@ip
+```
+
+After installing, ssh to remote and copy the root public ssh key. This key is needed for decrypting agenix secrets.
+``` shell
+cat /etc/ssh/ssh_host_ed25519_key.pub
+```
+
+This key should be inserted for the relevant hosts in [secrets/secrets.nix]. If necessary, rekey secrets with `agenix -r`
+
+### Local
 Most of the time it boils down to this:
 
 - make a change in this repo (e.g. add a new package, add a new env var)
@@ -52,15 +67,35 @@ Most of the time it boils down to this:
   alternatively, you can push the change to Github and run
 
   ```shell
-  $ sudo nixos-rebuild switch --flake github:alexghr/nix
+  $ sudo nixos-rebuild switch --flake github:pawsen/nix
   ```
 
 `nixos-rebuild` will default to apply the `nixosConfiguration` named after the
 current system's hostname, so the above command is equivalent to
 
 ```shell
-$ sudo nixos-rebuild switch --flake github:alexghr/nix#$(hostname)
+$ sudo nixos-rebuild switch --flake github:pawsen/nix#$(hostname)
 ```
+
+### Remote
+
+``` shell
+ nixos-rebuild switch --fast --flake .#hetzner --build-host user@ip  --target-host user@ip
+```
+
+If source is not able to build derivations for target, use `--build-on-remote`
+
+
+### Building a VM
+
+``` shell
+nixos-rebuild build-vm  --flake .#hetzner
+
+# or without nixos-rebuild
+nix build .#nixosConfigurations.test.config.system.build.vm
+```
+
+
 
 ## Todo
 
@@ -81,3 +116,4 @@ $ sudo nixos-rebuild switch --flake github:alexghr/nix#$(hostname)
 [nixtrooper]: ./hosts/nixtrooper/etc/nixos/configuration.nix
 [nix-darmin]: https://github.com/LnL7/nix-darwin
 [home-manager]: https://github.com/nix-community/home-manager
+[secrets/secrets.nix]: ./secrets/secrets.nix
