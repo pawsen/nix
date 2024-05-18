@@ -10,6 +10,7 @@ let
   pawSSHKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpF6gB2Z8CImJc3EdMlu7xyB4hwMzUxo+inccPbuvHV"
   ];
+  # host keys are found at /etc/ssh/ssh_host_ed25519_key.pub
   hk47HostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaNPaT6E+/26+O9FXE/r9NY733R2qih/HzOlybCuT6k";
   mackeyHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGMGuXCcUtBZmwfNVX99zG01uqnaXJFndNwePt3uMGLi";
   implausibleHostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdhFymmhJWSlL4if7YjlfVuRiUPjc4r9ddpHcgCzv5v";
@@ -24,6 +25,8 @@ let
 in {
   "tiger.tailscale.age".publicKeys = pawSSHKeys ++ [ tigerHostKey ];
   "hetzner.tailscale.age".publicKeys = pawSSHKeys ++ [ hetznerHostKey ];
+  "hetzner.nginx-auth.age".publicKeys = pawSSHKeys ++ [ hetznerHostKey ];
+  "hetzner.storagebox.age".publicKeys = pawSSHKeys ++ [ hetznerHostKey ];
   "vader.restic-b2-password.age".publicKeys = agSshKeys;
   "palpatine.tailscale.age".publicKeys = agSshKeys ++ [ palpatineHostKey ];
   "hk47.tailscale.age".publicKeys = agSshKeys ++ [ hk47HostKey ];

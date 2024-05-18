@@ -4,7 +4,7 @@
 #
 # if source is not able to build derivations for target, use --build-on-remote
 # nix run github:nix-community/nixos-anywhere -- --debug --flake .#hetzner root@65.21.53.22
-# nixos-rebuild switch --flake .#hetzner --build-host root@65.21.53.22  --target-host root@65.21.53.22
+# nixos-rebuild switch --fast --flake .#hetzner --build-host root@65.21.53.22  --target-host root@65.21.53.22
 # or without nixos-rebuild
 # nix build .#nixosConfigurations.test.config.system.build.vm
 # nixos-rebuild build-vm  --flake .#hetzner
@@ -14,10 +14,11 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./nginx.nix
     ./transmission.nix
+    ./syncthing.nix
+    ./storagebox.nix
   ];
 
   system.stateVersion = "23.11";
-
   disko.devices = import ./disk-configuration.nix { inherit lib; };
 
   services.btrfs.autoScrub = {
@@ -50,6 +51,7 @@
     hostName = "hetzner";
     firewall = {
       enable = true;
+      # 8384: syncthinggui, calibre-server: 8585
       allowedTCPPorts = [ 80 ];
     };
   };
@@ -61,7 +63,17 @@
     '';
   };
 
-  environment.systemPackages = with pkgs; [ git vim ];
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    lsof
+    tree
+    bind.dnsutils
+    tcpdump
+    nmap
+    wget
+    tmux
+  ];
 
   users = {
     # groups.plausible = {};
@@ -75,37 +87,22 @@
   age.secrets = {
     # attic-env.file = ../../secrets/attic.env.age;
     tailscale.file = ../../secrets/hetzner.tailscale.age;
+    nginx-auth.file = ../../secrets/hetzner.nginx-auth.age;
+    nginx-auth2.file = ../../secrets/hetzner.nginx-auth2.age;
+    storagebox.file = ../../secrets/hetzner.storagebox.age;
   };
 
-  # virtualisation = {
-  #   oci-containers = {
-  #     backend = "podman";
-  #     containers = {
-  #       alexghr = {
-  #         image = "ghcr.io/alexghr/www";
-  #         login = {
-  #           username = "alexghr";
-  #           passwordFile = config.age.secrets.ghcr.path;
-  #           registry = "ghcr.io";
-  #         };
-  #         ports = [
-  #           "8001:80"
-  #         ];
-  #       };
-  #       yaacc = {
-  #         image = "ghcr.io/alexghr/yaacc";
-  #         login = {
-  #           username = "alexghr";
-  #           passwordFile = config.age.secrets.ghcr.path;
-  #           registry = "ghcr.io";
-  #         };
-  #         ports = [
-  #           "8003:3000"
-  #         ];
-  #       };
-  #     };
-  #   };
-  # };
+  virtualisation = {
+    podman.autoPrune = {
+      # Automatically remove unused images (and other stuff) once a week
+      enable = true;
+      flags = [ "--all" ];
+    };
+    oci-containers = {
+      backend = "podman";
+      containers = { };
+    };
+  };
 
   services = {
     openssh = {
@@ -114,6 +111,19 @@
         PermitRootLogin = "yes";
         PasswordAuthentication = false;
       };
+    };
+
+    # by default a syncthing user is created, data is stored at /var/lib/syncthing/
+    syncthing = {
+      enable = true;
+      # open the default ports in the firewall: TCP/UDP 22000 for transfers and UDP 21027 for discovery.
+      # ie. does not open port 8384 for gui
+      openDefaultPorts = true;
+    };
+
+    calibre-server = {
+      enable = true;
+      port = 8585;
     };
 
     # this comes with SSH jail by default
@@ -181,6 +191,16 @@
   #     atticd.after = [ "atticd-postgres.service" ];
   # };
 
+  # storagebox is used as data storage
+  modules.storagebox = {
+    enable = true;
+    user = "u399239";
+    auth_file = config.age.secrets.storagebox.path;
+  };
+  modules.nginx = {
+    enable = true;
+    domain = "pawsen.net";
+  };
   alexghr.tailscale = {
     enable = true;
     authKeyFile = config.age.secrets.tailscale.path;
